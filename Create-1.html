@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Formulario de Experiencia</title>
+  </head>
+  <body>
+    <h1>Formulario de Experiencia</h1>
+    <form id="formulario" onsubmit="return enviarDados();">
+      <label for="empresa">Empresa:</label>
+      <input type="text" id="empresa" name="empresa"><br>
+
+      <label for="cargo">Cargo:</label>
+      <input type="text" id="cargo" name="cargo"><br>
+
+      <label for="inicio">Início:</label>
+      <input type="date" id="inicio" name="inicio"><br>
+
+      <label for="termino">Término:</label>
+      <input type="date" id="termino" name="termino"><br>
+
+      <label for="atual">Atual:</label>
+      <input type="checkbox" id="atual" name="atual"><br>
+
+      <label for="comentario">Comentário:</label>
+      <textarea id="comentario" name="comentario"></textarea><br>
+
+      <input type="submit" value="Salvar">
+    </form>
+    
+    <script>
+      function enviarDados() {
+        // Recupera os valores dos campos do formulário
+        var empresa = document.getElementById("empresa").value;
+        var cargo = document.getElementById("cargo").value;
+        var inicio = document.getElementById("inicio").value;
+        var termino = document.getElementById("termino").value;
+        var atual = document.getElementById("atual").checked ? 1 : 0;
+        var comentario = document.getElementById("comentario").value;
+
+        // Cria um objeto com os dados
+        var dados = {
+          empresa: empresa,
+          cargo: cargo,
+          inicio: inicio,
+          termino: termino,
+          atual: atual,
+          comentario: comentario
+        };
+
+        // Envia os dados para o servidor via AJAX
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "salvar-experiencia.php", true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.onreadystatechange = function() {
+          if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+            alert("Experiência salva com sucesso!");
+            // Limpa o formulário
+            document.getElementById("formulario").reset();
+          }
+        };
+        xhr.send(JSON.stringify(dados));
+
+        return false;
+      }
+    </script>
+  </body>
+</html>
