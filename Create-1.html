@@ -13,8 +13,7 @@
     textarea {
       height: 30vh;
       width: 30vw;
-      border-radius: 10px;
-      
+      border-radius: 10px;      
     }
 
     h1 {
@@ -22,7 +21,7 @@
     }
 
     .container-cadastro {
-      display: flex;
+      display: flex ;
       flex-direction: column;
       justify-content: space-between;
       align-items: flex-start;    
@@ -37,25 +36,38 @@
       border-radius: 10px;
     }
 
-    .title {
+    .header {
       display: flex;
       flex-direction: column;
       justify-content: flex-start; 
       align-items: flex-start; 
-    }
+    }    
 
     .logo{
       height: auto;
       width: 8em;
     }
 
+    .subtitle{
+      color: darkgrey;
+      margin-top: 0px;
+    }
+
+    .dates-forms{
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      gap: 1em;
+    }
+
   </style>
 </head>
 
 <body>
-  <div class="title">
+  <div class="header">
     <img class="logo" src="img/logo_univap.jpg" alt="logo univap">
     <h1>Experiência</h1>
+    <h2 class="subtitle">Experiências anteriores</h2>
   </div>
   
   <div class="container-cadastro">
@@ -65,17 +77,20 @@
     <label for="cargo">Cargo:</label>
     <input type="text" id="cargo" name="cargo">
 
-    <label for="inicio">Início:</label>
-    <input type="date" id="inicio" name="inicio">
-
-    <label for="termino">Término:</label>
-    <input type="date" id="termino" name="termino">
-
-    <label for="atual">Atual:</label>
-    <input type="checkbox" id="atual" name="atual">
-
-    <label for="comentario">Comentário:</label>
+    <label for="comentario">Descrição:</label>
     <textarea id="comentario" name="comentario"></textarea>
+
+    <div class="dates-forms">
+      <label for="inicio">Início:</label>
+      <input type="date" id="inicio" name="inicio">
+      <label for="termino">Término:</label>
+      <input type="date" id="termino" name="termino">
+    </div>
+
+    <div>
+      <label for="atual">Atual:</label>
+      <input type="checkbox" id="atual" name="atual"> 
+    </div>    
 
     <button id="btn-salvar" onclick="return enviarDados()">Salvar</button>
   </div>
