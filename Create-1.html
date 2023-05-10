@@ -1,73 +1,125 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Formulario de Experiencia</title>
-    <style>
-      input {
-        margin: 5px;
-      }
-    </style>
-  </head>
-  <body>
-    <h1>Formulario de Experiencia</h1>
-    <form id="formulario" onsubmit="return enviarDados();">
-      <label for="empresa">Empresa:</label>
-      <input type="text" id="empresa" name="empresa"><br>
 
-      <label for="cargo">Cargo:</label>
-      <input type="text" id="cargo" name="cargo"><br>
+<head>
+  <meta charset="UTF-8">
+  <title>Formulario de Experiencia</title>
+  <style>  
 
-      <label for="inicio">Início:</label>
-      <input type="date" id="inicio" name="inicio"><br>
+    label {
+      font-weight: bold;
+    }
 
-      <label for="termino">Término:</label>
-      <input type="date" id="termino" name="termino"><br>
+    textarea {
+      height: 30vh;
+      width: 30vw;
+      border-radius: 10px;
+      
+    }
 
-      <label for="atual">Atual:</label>
-      <input type="checkbox" id="atual" name="atual"><br>
+    h1 {
+      font-family: sans-serif;
+    }
 
-      <label for="comentario">Comentário:</label>
-      <textarea id="comentario" name="comentario"></textarea><br>
+    .container-cadastro {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: flex-start;    
+      height: 80vh;
+      width: 80vw;        
+    }
 
-      <input type="submit" value="Salvar">
-    </form>
-    
-    <script>
-      function enviarDados() {
-        // Recupera os valores dos campos do formulário
-        var empresa = document.getElementById("empresa").value;
-        var cargo = document.getElementById("cargo").value;
-        var inicio = document.getElementById("inicio").value;
-        var termino = document.getElementById("termino").value;
-        var atual = document.getElementById("atual").checked ? 1 : 0;
-        var comentario = document.getElementById("comentario").value;
+    button {
+      background-color: #417ec0;
+      color: aliceblue;
+      font-size: 1.5em;
+      border-radius: 10px;
+    }
 
-        // Cria um objeto com os dados
-        var dados = {
-          empresa: empresa,
-          cargo: cargo,
-          inicio: inicio,
-          termino: termino,
-          atual: atual,
-          comentario: comentario
-        };
+    .title {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start; 
+      align-items: flex-start; 
+    }
 
-        // Envia os dados para o servidor via AJAX
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", "salvar-experiencia.php", true);
-        xhr.setRequestHeader("Content-Type", "application/json");
-        xhr.onreadystatechange = function() {
-          if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-            alert("Experiência salva com sucesso!");
-            // Limpa o formulário
-            document.getElementById("formulario").reset();
-          }
-        };
-        xhr.send(JSON.stringify(dados));
+    .logo{
+      height: auto;
+      width: 8em;
+    }
 
-        return false;
-      }
-    </script>
-  </body>
+  </style>
+</head>
+
+<body>
+  <div class="title">
+    <img class="logo" src="img/logo_univap.jpg" alt="logo univap">
+    <h1>Experiência</h1>
+  </div>
+  
+  <div class="container-cadastro">
+    <label for=" empresa">Empresa:</label>
+    <input type="text" id="empresa" name="empresa">
+
+    <label for="cargo">Cargo:</label>
+    <input type="text" id="cargo" name="cargo">
+
+    <label for="inicio">Início:</label>
+    <input type="date" id="inicio" name="inicio">
+
+    <label for="termino">Término:</label>
+    <input type="date" id="termino" name="termino">
+
+    <label for="atual">Atual:</label>
+    <input type="checkbox" id="atual" name="atual">
+
+    <label for="comentario">Comentário:</label>
+    <textarea id="comentario" name="comentario"></textarea>
+
+    <button id="btn-salvar" onclick="return enviarDados()">Salvar</button>
+  </div>
+
+
+  <script>
+    const button = document.getElementById("btn-salvar");
+    button.onclick = enviarDados
+
+    function enviarDados() {
+      // Recupera os valores dos campos do formulário
+      var empresa = document.getElementById("empresa").value;
+      var cargo = document.getElementById("cargo").value;
+      var inicio = document.getElementById("inicio").value;
+      var termino = document.getElementById("termino").value;
+      var atual = document.getElementById("atual").checked ? 1 : 0;
+      var comentario = document.getElementById("comentario").value;
+
+      // Cria um objeto com os dados
+      var dados = {
+        empresa: empresa,
+        cargo: cargo,
+        inicio: inicio,
+        termino: termino,
+        atual: atual,
+        comentario: comentario
+      };
+
+      // Envia os dados para o servidor via AJAX
+      var xhr = new XMLHttpRequest();
+      xhr.open("POST", "salvar-experiencia.php", true);
+      xhr.setRequestHeader("Content-Type", "application/json");
+      xhr.onreadystatechange = function () {
+        if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+          alert("Experiência salva com sucesso!");
+          // Limpa o formulário
+          document.getElementById("formulario").reset();
+        }
+      };
+      xhr.send(JSON.stringify(dados));
+
+      return false;
+    }
+  </script>
+</body>
+
 </html>
